@@ -28,7 +28,7 @@ Medical imaging data often comes in specialized formats (like DICOM and NIfTI) a
 - Normalization: Pixel intensities were rescaled to 0–255 and normalized to match natural image input range.
 - Prompt Boxes: Bounding boxes were generated programmatically around the nodules as input prompts for SAM and MedSAM1.
 
-### RSNA BraTS (Brain Tumor MRI):
+### ✅ RSNA BraTS (Brain Tumor MRI):
 - NIfTI Slicing: Axial slices were extracted from T1CE modality using nibabel.
 - Label Selection: From the segmentation labels, only the Enhancing Tumor (ET) region was used (label=4).
 - Mask Processing:
@@ -38,3 +38,29 @@ Medical imaging data often comes in specialized formats (like DICOM and NIfTI) a
 - Prompt Generation: Bounding boxes tightly enclosing the ET region were created.
 
 This preprocessing pipeline ensured that the model inputs — both image and mask — were clean, aligned, and matched the modality assumptions of the zero-shot SAM-based models.
+
+## 🧠 Models Evaluated
+| Model	 | Backbone |	Training Base |	Notes |
+|--------|--------|--------|--------|
+| SAM | ViT-H | SA-1B (natural imgs) | General-purpose model |
+| MedSAM1 | ViT-B |1.5M medical masks | Tuned on medical domain |
+
+## 🧪 Evaluation Metrics
+- ✅ Dice Score
+- 📐 IoU (Intersection over Union)
+- 📏 HD95 (Hausdorff Distance @ 95%)
+- ⏱ Inference Time (per slice)
+
+💡 Key Findings
+- MedSAM1 consistently outperformed SAM across both datasets.
+- MedSAM1 provided sharper boundaries, higher Dice/IoU, and lower HD95.
+- SAM showed surprising generalization but lacked precision in edge alignment.
+- Both models were evaluated using bounding box prompts (no fine-tuning).
+
+Sample Results
+| Dataset | Model | Dice ↑ | IoU ↑| HD95 ↓ | Time (s) ↓ |
+|---------|---------|---------|---------|---------|---------|
+| LIDC | SAM | ~0.60 | ~0.50 | >15 px | 0.50 |
+| | MedSAM1 | ~0.75 | ~0.65 | ~5 px | 0.45 |
+| BraTS | SAM | ~0.52 | ~0.40 | >20 px | 0.48 |
+| | MedSAM1 | ~0.63 | ~0.50 | ~10 px | 0.46 |
