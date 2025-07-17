@@ -1,4 +1,5 @@
 🧠 SAM vs MedSAM1: Zero-Shot Medical Image Segmentation
+
 This project evaluates the Segment Anything Model (SAM) and its domain-adapted variant MedSAM1 on two key medical imaging datasets — LIDC-IDRI (lung CT nodules) and RSNA BraTS (brain tumor MRI). The goal is to assess their zero-shot segmentation performance using bounding box prompts and visualize where medical-specific fine-tuning improves segmentation outcomes.
 
 🚀 Project Highlights
