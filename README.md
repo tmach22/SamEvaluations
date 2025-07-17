@@ -57,7 +57,7 @@ This preprocessing pipeline ensured that the model inputs — both image and mas
 - SAM showed surprising generalization but lacked precision in edge alignment.
 - Both models were evaluated using bounding box prompts (no fine-tuning).
 
-Sample Results
+## Sample Results
 | Dataset | Model | Dice ↑ | IoU ↑| HD95 ↓ | Time (s) ↓ |
 |---------|---------|---------|---------|---------|---------|
 | LIDC | SAM | ~0.60 | ~0.50 | >15 px | 0.50 |
